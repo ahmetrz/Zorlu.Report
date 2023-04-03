@@ -14,10 +14,12 @@ namespace Zorlu.Report.Models.Contexts
 
 		public DbSet<Data> Data { get; set; }
 		public DbSet<Rapor1> Rapor1 { get; set; }
+		public DbSet<IstekIdIstekTipi> IstekIdIstekTipi { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Rapor1>().HasNoKey();
+			modelBuilder.Entity<IstekIdIstekTipi>().HasNoKey();
 		}
 
 

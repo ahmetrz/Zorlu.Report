@@ -260,5 +260,21 @@
 		public int AyOncesi { get; set; }
 		public int Ay { get; set; }
 		public int Total { get; set; }
+
+		public List<IstekTipiTotal> IsteklerTotal { get; set; }
+	}
+
+
+	public class IstekTipiTotal
+	{
+		public string IstekTipi { get; set; }
+		public int Toplam { get; set; }
+	}
+
+	public class IstekIdIstekTipi
+	{
+		public string istekId { get; set; }
+		public string bistekTipi { get; set; }
+
 	}
 }
