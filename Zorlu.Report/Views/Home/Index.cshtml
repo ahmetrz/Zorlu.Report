@@ -1,0 +1,68 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+
+	<input type="file" id="excelFile" class="my-pond" name="filepond" />
+
+	<button id="other">Gönder</button>
+</div>
+
+@section Scripts
+	{
+
+	<script>
+		$(function () {
+
+			const inputElement = document.querySelector("#excelFile");
+			var pond = FilePond.create(inputElement,
+				{
+					acceptedFileTypes: [
+						"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+						"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+						"application/vnd.ms-excel"
+					],
+					fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+						resolve(type);
+					}),
+					allowMultiple: true
+				});
+
+
+
+			$("#other").click(function () { 
+				const files = pond.getFiles();
+				var formData = new FormData();
+				if (files.length > 0)
+					formData.append("file", files[0].file);
+				var result;
+				$.ajax({
+					url: "/Home/Import",
+					method: "POST",
+					data: formData,
+					contentType: false,
+					async: true,
+					cache: false,
+					processData: false,
+					success: function (response) {
+						console.log(response);
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+			})
+
+
+
+
+		});
+
+
+
+
+	</script>
+
+}
